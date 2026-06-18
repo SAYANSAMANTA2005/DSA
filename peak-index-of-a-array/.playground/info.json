@@ -1,0 +1,1 @@
+{"a":"peak index of a array","b":"peak index means -\narr[peak idx]\u003earr[peak idx -1 ]\narr[peak idx]\u003carr[peak idx +1]\nO(log n) time complexity \n","c":"CPP"}
