@@ -1,0 +1,56 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define size 6
+#define target 9
+int window_size =0;//
+int solution=size;
+int sum;
+int arr[]={2,1,5,2,7,6};
+
+int i=0;int j=0;
+
+int min(int a,int b){
+
+if(a>b){return b;}
+
+else{return a;}
+
+}
+
+void window_size_decrement_function(){
+
+while(sum>=target){
+window_size=j-i+1;
+solution =min(solution,window_size);
+sum=sum-arr[i];
+i++;
+
+//window_size=j-i+1;
+
+ }
+ 
+ return;
+}
+
+
+
+
+int main() {
+
+ 
+ while(j<size){
+ sum=sum+arr[j];
+ if(sum>=target){
+ window_size_decrement_function();
+ j++;
+ }
+ else{j++;}
+ //sum=sum+arr[j];
+ //j++;
+ }
+ 
+ printf("%d",solution);
+ 
+  return 0;
+    
+}

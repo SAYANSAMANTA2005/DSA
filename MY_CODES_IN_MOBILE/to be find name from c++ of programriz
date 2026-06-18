@@ -1,0 +1,43 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+#define no_of_element 100
+int arr[no_of_element];
+
+int sum[no_of_element];
+
+int main(){
+
+clock_t start_time=clock();
+int max=-100000;
+int arr[]={5,-8,-1,4,4};
+
+int n=sizeof(arr)/sizeof(arr[0]);
+
+sum[0]=arr[0];
+max=sum[0];
+
+for(int j=0;j<n;j++){
+
+printf("arr[%d]=%d ,",j,arr[j]);
+sum[j+1]=sum[j]+arr[j+1];
+
+if(sum[j+1]<0){sum[j+1]=0;}
+
+printf("sum[%d]=%d ,",j,sum[j]);
+if(max<sum[j]){max=sum[j];}
+printf("max[%d]=%d ,\n",j,max);
+  }
+ 
+
+printf("\nmax[%d]\n(index of starting array element of summing) of subarray is:%d",0,max);
+
+clock_t end_time=clock();
+
+double timespend=((double)(end_time-start_time))/
+CLOCKS_PER_SEC*1000000;
+printf("\nTime spend to run the code\n:%lf microsecond",timespend);
+return 0;
+
+}
+

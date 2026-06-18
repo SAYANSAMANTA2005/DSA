@@ -1,0 +1,117 @@
+#include<stdio.h>
+#define MAX 100          //|
+int arr[MAX];
+  
+   int size =0;
+                     
+                     
+                        // | inserting index
+                       
+  void swap(int *a,int *b){
+  int temp=*a;
+  *a=*b;
+  *b=temp;
+  }                     
+    int max(int *a,int*b){
+    if(*a>*b){return *a;}
+   
+    else{return *b;}
+    }                 
+                       
+void insert_node_in_heap(int val){
+
+if(size>=MAX-1){
+printf("heap is overflowed");
+
+return;}
+size=size+1;
+int index=size;
+arr[index]=val;
+
+while(index>1){//swaping the parent with child node if val of child is more than val of parent
+int parent_index=index/2;
+
+if(arr[parent_index]<arr[index]){
+
+swap(&arr[parent_index],&arr[index]);
+
+index=parent_index;
+     }
+     else{return;}
+   }
+}
+// Function to correct the position of the root element
+void correct_root_position(int index) {
+    while (2 * index <= size) {
+        int left_child = 2 * index;
+        int right_child = 2 * index + 1;
+        int largest = index;
+
+        if (left_child <= size && arr[left_child] > arr[largest]) {
+            largest = left_child;
+        }
+        if (right_child <= size && arr[right_child] > arr[largest]) {
+            largest = right_child;
+        }
+
+        if (largest != index) {
+            swap(&arr[index], &arr[largest]);
+            index = largest;
+        } else {
+            break;
+        }
+    }
+}
+
+void delete_root(){
+if(size==0){
+printf("nothing to delete");
+return ;}
+
+arr[1]=arr[size];
+
+size--;//updating root node to last node and deletion of previous root node
+correct_root_position(1);//index 1 postion element finding right position in maxheap
+//swaping the parent with child node if val of child is more than val of parent
+
+return ;
+}
+
+void print_heap(){
+
+for(int i=1;i<=size;i++){//as we consider starting index of heap to 1
+
+printf("%d ",arr[i]);}
+
+return;
+
+}
+
+int main(){
+insert_node_in_heap(5);
+
+insert_node_in_heap(4);
+
+
+insert_node_in_heap(3);
+insert_node_in_heap(2);
+insert_node_in_heap(1);
+insert_node_in_heap(50);
+
+insert_node_in_heap(40);
+
+
+insert_node_in_heap(30);
+insert_node_in_heap(20);
+insert_node_in_heap(10);
+
+print_heap();
+
+printf("\n");
+delete_root();
+print_heap();
+
+return 0;
+
+}
+

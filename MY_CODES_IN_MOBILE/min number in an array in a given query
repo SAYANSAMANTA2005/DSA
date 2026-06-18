@@ -1,0 +1,62 @@
+#include<stdio.h>
+#include<time.h>
+
+#define end 8
+
+int val[end][end]={{0}};//globally declare val for storing info about each node
+
+
+
+int min(int a,int b){
+if(a>b){return b;
+    }
+  else{return a;
+  }
+}
+
+int node(int l,int h){
+
+if(l==h){
+
+return val[l][h];}//base case for leaf node
+
+else{
+node(l,(l+h)/2);//recursive call for next children exploration
+node(((l+h)/2)+1,h);
+
+val[l][h]= min(val[l][(l+h)/2],val[((l+h)/2)+1][h]);// storing the nodes value (otherthan leaf nodes) from children nodes information
+printf("%d, %d node val is:%d\n",l,h,val[l][h]);
+return val[l][h];
+
+ 
+  }
+
+}
+
+int main(){
+   clock_t start_time=clock();
+// int val[end][end]={{0}};
+
+val[0][0]=0;
+val[1][1]=1;
+val[2][2]=2;
+val[3][3]=3;
+val[4][4]=4;
+val[5][5]=5;
+val[6][6]=6;
+val[7][7]=7;
+//fixing leaf node values
+
+int l=0, h=7;
+int ans=node(l,h);
+printf("min no of array between array index %d and %dis\n:%d",l,h,ans);
+clock_t end_time=clock();
+
+double time=((double)(end_time-start_time))/
+CLOCKS_PER_SEC*1000000;
+
+printf("\ntime taken to run the code is\n%lf microsecond",time);
+return 0;
+
+}
+

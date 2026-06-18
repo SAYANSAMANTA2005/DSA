@@ -1,0 +1,96 @@
+#include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
+#include <stdlib.h>
+#include<time.h>
+#define NUM_CHAR 26
+#define MAX 200
+char prefix[MAX];
+int no_of_word=1;
+typedef struct trienode {
+    struct trienode *children[NUM_CHAR];
+    bool terminal;
+} trienode;
+
+trienode* createnode() {//memory alocation and setting all children to null
+    trienode*newnode=(trienode*)malloc(sizeof(trienode));
+    for(int i=0;i<NUM_CHAR;i++){
+     //means checking of  that part of word is not previously allocated
+     
+     // newnode->children[i]=(trienode*)malloc(sizeof(trienode));
+   
+     newnode->children [i]=NULL;
+    
+     
+    }
+   
+    return newnode;
+}
+void trieinsert(trienode **root, char *signedtext) {
+    if (*root == NULL) {
+        *root = createnode();
+    }
+    trienode *current = *root;
+    while (*signedtext) {
+        int index = *signedtext - 'a';
+        if (current->children[index] == NULL) {
+            current->children[index] = createnode();
+        }
+        current = current->children[index];
+        signedtext++;
+    }
+    current->terminal = true;
+}
+
+void trieprinthelper(trienode *root, char *prefix, int level) {
+     if(root->terminal){
+     prefix[level]='\0';
+    
+    
+     printf(" %d)%s \n",no_of_word,prefix);
+      no_of_word++;
+       }
+for(int i=0;i<NUM_CHAR;i++){
+     if(root->children [i]!=NULL){//means checking of  that part of word is not previously allocated
+   
+      prefix[level]='a'+i;//constructing prefix array for word storing and writing
+    
+      trieprinthelper(root->children [i],prefix,level+1) ;
+      }
+    }
+   
+   
+}
+
+void trieprint(trienode *root) {
+
+char prefix[MAX];
+  
+      trieprinthelper(root,prefix,0);
+      }
+
+int main() {
+
+   clock_t start_time=clock();
+    trienode *root = NULL;
+
+    trieinsert(&root, "apple");
+   trieinsert(&root, "app");
+    trieinsert(&root, "banana");
+    trieinsert(&root, "sayan");
+   trieinsert(&root, "samanta");
+  
+
+    printf("Words in the trie:\n");
+    trieprint(root);
+   clock_t end_time=clock();
+  
+   double time=((double)(end_time-start_time)/
+   CLOCKS_PER_SEC*1000000);
+  
+   printf("\nTime to run the code :%lf microsecond ",time);
+  
+  
+    return 0;
+}
+

@@ -1,0 +1,121 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+
+struct stack{
+
+int size;
+int top;
+int*arr;
+
+};
+int isstackfull(struct stack *s){
+if(s->top>=s->size-1){return 1;
+    }
+  else{return 0;}
+}
+
+int isstackempty (struct stack *s){
+if(s->top==-1){return 1;//it is true that stack is empty
+}
+  else{return 0;}//it is false that stack is empty
+  }
+
+void push(struct stack *s,int data){
+if(isstackfull(s)==1){
+printf("stack is overflowed/ stack is full");
+return ;}
+
+else{
+s->top++;
+s->arr[s->top]=data;
+return ;
+   }
+}
+
+int pop(struct stack *s){
+if(isstackempty(s)==1){
+printf("stack is underflow/stack is empty");
+return -1;
+}
+
+else{
+   
+    int temp=s->arr[s->top];
+   s->top--;
+   return temp;
+   }
+}
+showstacktop(struct stack*s){
+  printf("%d\n",s->arr[s->top]);
+}
+showstackbottom (struct stack*s){
+  printf("%d\n",s->arr[0]);
+}
+printfuction(struct stack *s){
+if(isstackfull(s)==1){
+printf("stack is overflowed/ stack is full");}
+else{ for(int i=0;i<=s->top;i++){
+
+printf("%d ",s->arr[i]);
+  }}}
+
+
+
+
+
+int main(){
+
+
+struct stack* s = (struct stack*)malloc(sizeof(struct stack));
+s->size=80;
+s->top=-1;
+s->arr=(int*)malloc(s->size*sizeof(int));
+int data=80;
+push(s,data);//time complexity 0(1)
+
+push(s,90);
+
+push(s,9);
+printf("\noriginal stack :\n");
+
+printfuction(s);//time complexity 0(1)
+
+printf("\ntop element of stack is:");
+
+showstacktop(s);//time complexity 0(1)
+
+printf("\nbottom most element of stack is:");
+showstackbottom(s);//time complexity 0(1)
+
+//pop(s);//time complexity 0(1)
+
+printf("\nnew stack after poping :\n");
+printfuction(s);//time complexity 0(1)
+
+struct stack* new = (struct stack*)malloc(sizeof(struct stack));
+new->size=80;
+new->top=-1;
+new->arr=(int*)malloc(new->size*sizeof(int));
+
+push(new,pop(s));//time complexity 0(1)
+
+push(new,pop(s));
+
+push(new,pop(s));
+
+printf("\nreverse of previous stack is :");
+printfuction(new);
+
+free(s->arr);
+free(s);
+
+free(new->arr);
+free(new);
+
+
+return 0;
+
+
+}
+

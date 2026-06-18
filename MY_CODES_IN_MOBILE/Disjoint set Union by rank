@@ -1,0 +1,101 @@
+#include <stdio.h>
+#include<time.h>//for calculation of execution of code in computer
+#define Max 100
+
+int parent[Max];
+
+int rank[Max];
+
+void make(int v){//initialising element and making them their parent
+
+parent[v]=v;
+
+rank[v]=0;
+
+}
+
+int find_set(int v){//finding parent of an element
+
+if(v==parent[v]){
+return v;
+   }
+  
+return parent[v]= find_set(parent [v]);//path compression
+//time complexity O(log n)
+
+}
+
+void  UNION_SETS(int a,int b){//connecting new element to it's parent
+a=find_set(a);//actual parent of a
+b=find_set(b);//actual parent of b
+
+if(a!=b){
+  if (rank[a] < rank[b]) {//prevention for reduction of length depth of tree
+            parent[a] = b;
+        } else if (rank[a] > rank[b]) {
+            parent[b] = a;//prevention for reduction of length depth of tree
+        } else {
+            parent[b] = a;//setting the b's parent to a
+            rank[a]++;
+        }
+    }//setting the b's parent to a
+ 
+  }
+
+
+
+
+
+int main() {
+
+    clock_t start_time=clock();
+   
+
+int n = 10;  // Example number of elements
+
+    // Initialize each element
+   
+    make(1);
+    make(2);
+   
+    make(3);
+    make(4);
+   
+       
+    make(5);
+    make(6);
+   
+    make(7);
+    make(8);
+   
+   
+    // Example operations
+    UNION_SETS(1, 2);
+    UNION_SETS(3, 4);
+    UNION_SETS(2, 3);
+    UNION_SETS(5, 6);
+    UNION_SETS(6, 7);
+    UNION_SETS(7, 8);
+   
+   
+
+    printf("Find set of element 1: %d\n", find_set(1));  // Should print the root of the set containing 1
+    printf("Find set of element 3: %d\n", find_set(3));  // Should print the same root as above
+
+    printf("Find set of element 5: %d\n", find_set(5));  // Should print the same root as above
+
+    printf("Find set of element 6: %d\n", find_set(6));  // Should print the same root as above
+
+
+clock_t end_time=clock();
+    // Calculate the elapsed time in seconds
+    double time_taken = ((double)(end_time - start_time)) /
+    CLOCKS_PER_SEC*1000000;
+
+    printf("Time taken for union-find operations\n: %lf microseconds\n", time_taken);
+   
+   
+   
+    return 0;
+}
+

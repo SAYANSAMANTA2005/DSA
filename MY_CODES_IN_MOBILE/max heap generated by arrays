@@ -1,0 +1,72 @@
+#include<stdio.h>
+#define MAX 100          //|
+int arr[MAX];
+  
+   int size =0;
+                     
+                     
+                        // | inserting index
+                       
+  void swap(int *a,int *b){
+  int temp=*a;
+  *a=*b;
+  *b=temp;
+  }                     
+                       
+void insert_node_in_heap(int val){
+
+if(size>=MAX-1){
+printf("heap is overflowed");
+
+return;}
+size=size+1;
+int index=size;
+arr[index]=val;
+
+while(index>1){
+int parent_index=index/2;
+
+if(arr[parent_index]<arr[index]){
+
+swap(&arr[parent_index],&arr[index]);
+
+index=parent_index;
+     }
+     else{return;}
+   }
+}
+
+void print_heap(){
+
+for(int i=1;i<=size;i++){//as we consider starting index of heap to 1
+
+printf("%d ",arr[i]);}
+
+}
+
+int main(){
+insert_node_in_heap(5);
+
+insert_node_in_heap(4);
+
+
+insert_node_in_heap(3);
+insert_node_in_heap(2);
+insert_node_in_heap(1);
+insert_node_in_heap(50);
+
+insert_node_in_heap(40);
+
+
+insert_node_in_heap(30);
+insert_node_in_heap(20);
+insert_node_in_heap(10);
+
+print_heap();
+
+
+
+return 0;
+
+}
+

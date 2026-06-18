@@ -1,0 +1,137 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define n 7
+struct queue{
+
+int size;
+int f;
+int r;
+int*arr;
+
+};
+int isfull(struct queue *s){
+if(s->r==s->size-1){return 1;
+    }
+  else{return 0;}
+}
+
+int isempty (struct queue *s){
+if(s->f==s->r){return 1;//it is true that queue is empty
+}
+  else{return 0;}//it is false that  queue is empty
+  }
+
+void  enqueue(struct queue *s,int data){
+if(isfull(s)==1){
+printf("queue is overflowed/ stack is full");
+return ;}
+
+else{
+s->r++;
+s->arr[s->r]=data;
+return ;
+   }
+}
+
+int  dequeue(struct queue*s){
+if(isempty(s)==1){
+printf("queue is underflow/stack is empty");
+  return -100;}
+
+else{
+   s->f++;
+   printf("\n dequeued element is: %d",s->arr[s->f]);
+  
+   return s->arr[s->f];
+   }
+}
+
+void showqueuebottom(struct queue*s){
+if(isempty(s)==1){
+printf("queue is underflow/stack is empty");
+}
+  else {printf("%d\n",s->arr[s->r]);}
+}
+void showqueuetop (struct queue*s){
+if(isempty(s)==1){
+printf("queue is underflow/stack is empty");
+}
+  else{ printf("%d\n",s->arr[s->f+1]);}
+}
+
+
+void printfuction(struct queue*s){
+if(isempty(s)){
+printf("queue is overflowed/ stack is full");}
+else{ for(int i=s->f+1;i<=s->r;i++){
+
+printf("%d ",s->arr[i]);
+  }}}
+
+
+
+
+
+int main(){
+
+struct queue*s= (struct queue*)malloc(sizeof(struct queue));
+if(!s){
+
+printf("memory allocation failed");
+return 1;}
+s->size=100;
+s->f=s->r=-1;
+s->arr=(int*)malloc(s->size*sizeof(int));
+if(!s->arr){
+
+printf("memory allocation failed");
+free(s);
+return 1;}
+
+int visited [n]={0,0,0,0,0,0,0};
+
+int u;
+int i=0;
+int arr[n][n]={//adjacency matrix
+
+{0,1,1,1,0,0,0},
+{1,0,0,1,0,0,0},
+{1,0,0,1,1,0,0},
+{1,1,1,0,1,0,0},
+{0,0,1,1,0,1,1},
+{0,0,0,0,1,0,0},
+{0,0,0,0,1,0,0}
+
+};
+
+printf("%d",i);
+visited[i]=1;
+enqueue (s,i);
+
+while(isempty(s)==0){
+
+int node=dequeue(s);
+
+for(int j=0;j<n;j++){//serching all connected nodes to s node by 1 edge distace
+
+
+    if(arr[node][j]==1&&visited[j]==0){//for
+     
+      printf("\nj is:%d ",j);
+      visited[j]=1;//marking j node is visited so that later j is not visited
+      //and stops furt repetative enqueued in queue
+      enqueue(s,j);
+      printf(" queue:");
+     printfuction(s);
+      }
+   }
+
+}
+
+
+
+return 0;
+
+
+}
+

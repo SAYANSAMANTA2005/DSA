@@ -1,0 +1,123 @@
+#include<stdio.h>
+#include<time.h>
+#define MAX 100         
+int arr[MAX];
+   int heap_sorting_array[MAX];
+   int size=0;
+                       
+  void swap(int *a,int *b){
+  int temp=*a;
+  *a=*b;
+  *b=temp;
+  }                     
+    int max(int *a,int*b){
+    if(*a>*b){return *a;}
+   
+    else{return *b;}
+    }                 
+                       
+void insert_node_in_heap(int val){
+
+if(size>=MAX-1){
+printf("heap is overflowed");
+
+return;}
+size=size+1;
+int index=size;
+arr[index]=val;
+
+while(index>1){//swaping the parent with child node if val of child is more than val of parent
+int parent_index=index/2;
+
+if(arr[parent_index]<arr[index]){
+
+swap(&arr[parent_index],&arr[index]);
+
+index=parent_index;
+     }
+     else{return;}
+   }
+}
+// Function to correct the position of the root element
+void correct_root_position(int index) {//logn time complexity
+    while (2 * index <= size) {
+        int left_child = 2 * index;
+        int right_child = (2 *index )+ 1;
+        int largest = index;
+
+        if (left_child <= size && arr[left_child] > arr[largest]) {
+            largest = left_child;
+        }
+        if (right_child <= size && arr[right_child] > arr[largest]) {
+            largest = right_child;
+        }
+
+        if (largest != index) {
+            swap(&arr[index], &arr[largest]);
+            index = largest;
+        } else {
+            break;
+        }
+    }
+}
+
+void delete_root(){
+if(size==0){
+printf("nothing to delete");
+return ;}
+heap_sorting_array[size+1]=arr[1];
+arr[1]=arr[size];
+
+size--;//updating root node to last node and deletion of previous root node
+correct_root_position(1);//index 1 postion element finding right position in maxheap
+//swaping the parent with child node if val of child is more than val of parent
+
+return ;
+}
+
+void print_heap(){
+
+for(int i=1;i<=size;i++){//as we consider starting index of heap to 1
+
+printf("%d ",arr[i]);}
+
+return;
+
+}
+
+int main(){
+
+clock_t start_time =clock();
+int n=10;
+int grid[MAX]={5,4,3,2,1,50,40,30,20,10};
+for(int i=0;i<n;i++){//creating max heap
+insert_node_in_heap(grid[i]);
+
+}
+
+print_heap();//printing by level order traversal
+printf("\n");
+
+for (int i = 1; i <= n; i++) {
+        delete_root();
+       // printf("%d ", heap_sorting_array[i]);
+      // printf("%d ", heap_sorting_array[n-i]);
+    }
+   
+
+    // Print sorted array
+    printf("\nSorted array: \n");
+    for (int i = 2; i <= n+1; i++) {
+        printf("%d ", heap_sorting_array[i]);
+    }
+    printf("\n");
+
+clock_t end_time =clock();
+
+double run_time=((double )(end_time-start_time))/
+CLOCKS_PER_SEC*1000000;
+printf("\n time to run the code is:\n%lf microsecond",run_time);
+return 0;
+
+}
+

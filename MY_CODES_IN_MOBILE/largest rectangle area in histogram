@@ -1,0 +1,68 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+#define no_of_element 100
+//int arr[no_of_element];
+int arr[]={2,1,5,6,2,3};
+int n=6;
+
+
+int min_(int a,int b){
+
+if(b>a){return a;}
+
+else{return b;}}
+
+int max_(int a,int b){
+
+if(b<a){return a;}
+
+else{return b;}}
+
+int minheightfunction(int i,int j){
+int height=arr[i];
+for(int k=i;k<=j;k++){
+
+height=min_(arr[k],height);}
+
+return height;}
+
+int base(int i,int j){
+return j-i+1;
+
+}
+
+int area(int i,int j){
+
+return minheightfunction(i,j)*base(i,j);
+}
+
+int solutionarea(){
+int maxarea=0;
+for(int i=0;i<n;i++){
+for(int j=i;j<n;j++){
+
+maxarea=max_(maxarea,area(i,j));
+}}
+
+return maxarea;
+}
+
+int main(){
+
+clock_t start_time=clock();
+
+int arr[]={2,1,5,6,2,3};
+
+//int n=sizeof(arr)/sizeof(arr[0]);
+int ans=solutionarea();
+
+printf("%d",ans);
+clock_t end_time=clock();
+
+double timespend=((double)(end_time-start_time))/
+CLOCKS_PER_SEC*1000000;
+printf("\nTime spend to run the code\n:%lf microsecond",timespend);
+return 0;
+
+}
