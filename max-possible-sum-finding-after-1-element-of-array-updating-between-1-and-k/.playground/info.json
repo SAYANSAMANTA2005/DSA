@@ -1,0 +1,1 @@
+{"a":"max possible sum finding after 1 element of array updating between 1 and k","b":"sum is calculated\u003dsummation(abs(arr[i]-arr[i]))\n\nfor i\u003d0 to i\u003dn-2","c":"CPP"}
