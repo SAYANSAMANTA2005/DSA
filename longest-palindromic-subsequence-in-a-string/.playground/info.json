@@ -1,0 +1,1 @@
+{"a":"longest palindromic subsequence in a string","b":"time complexity -O(n^2)\nn\u003d s.size()","c":"CPP"}
