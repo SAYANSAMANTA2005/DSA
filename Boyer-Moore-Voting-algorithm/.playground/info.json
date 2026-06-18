@@ -1,0 +1,1 @@
+{"a":"Boyer Moore Voting algorithm","b":"find element with frequency\u003earr.size()/2\n\nTime complexity: O(n)\nAuxiliary space complexity: O(1)","c":"CPP"}
