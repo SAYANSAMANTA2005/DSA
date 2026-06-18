@@ -1,0 +1,1 @@
+{"a":"no of divisors of a number from 1 to n","b":"Time complexity O(nlog(n*(logn)))","c":"CPP"}
